@@ -104,6 +104,8 @@ void PPMImage_free(PPMImage *img) {
     }
 }
 
+
+
 void PPMImage_setPixel(PPMImage* img, int x, int y, unsigned int r, unsigned int g, unsigned int b) {
     if (x < 0 || x >= img->width || y < 0 || y >= img->height) {
         return;
@@ -111,3 +113,4 @@ void PPMImage_setPixel(PPMImage* img, int x, int y, unsigned int r, unsigned int
     PPMPixel *pixel = &img->data[y * img->width + x];
     PPMPixel_set(pixel, r, g, b);
 }
+
