@@ -15,23 +15,15 @@ int main() {
    
   Vec3* position = Vec3_create(0, 0, -50);
   Vec3* target = Vec3_create(0, 0, 1000);
-
   PCamera* camera = PCamera_create(position, target);
-  PPMImage* image = PPMImage_create(800, 600); // Fixed function name
-  PPMPixel color = {255, 255, 255};
-
-  for (int i = 0; i < image->width; i++) {
-    for (int j = 0; j < image->height; j++) {
-      Vec3* point = Vec3_create(i - image->width / 2, j - image->height / 2, 0);
-      Vec2* projectedPoint = PCamera_project(camera, point, 1, 1);
-      // PPMImage_setPixel(image, i, j, color); // Fixed function name
-      Vec3_free(point);
-      Vec2_free(projectedPoint);
-    }
-  } 
-
+  PPMImage* image = PPMImage_create(800, 600);
+  Ray* ray = Ray_create(position, target);
+  PPMPixel* pixel = PPMPixel_create(0, 0, 0);
+  PPMPixel_set(pixel, 255, 255, 255);
+  PPMImage_write("output.ppm", image);
+  Ray_free(ray);
+  PPMPixel_free(pixel);
   PCamera_free(camera);
-  PPMImage_write(image, "output.ppm"); // Fixed function name
   PPMImage_free(image); // Fixed function name
   Vec3_free(position);
   Vec3_free(target);

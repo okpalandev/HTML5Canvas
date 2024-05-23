@@ -3,15 +3,18 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 
 typedef struct PPMPixel PPMPixel;
 struct PPMPixel {
-    unsigned char r, g, b;
+    unsigned int r, g, b;
 };
 
-PPMPixel* PPMPixel_create(unsigned char r, unsigned char g, unsigned char b);  
+PPMPixel* PPMPixel_create(unsigned int r, unsigned int g, unsigned int b);  
+void PPMPixel_set(PPMPixel* pixel, unsigned int r, unsigned int g, unsigned int b);
 void PPMPixel_free(PPMPixel* pixel);
+
 
 // Define the PPMImage structure
 typedef struct PPMImage PPMImage;
@@ -24,8 +27,7 @@ struct PPMImage {
 /* Function prototypes for PPM image processing */
 
 // Function to create a new PPM image
-PPMImage* PPMImage_create(int width, int height);
-
+PPMImage* PPMImage_create(unsigned int width, unsigned int height);
 // Function to read a PPM image from a file
 PPMImage* PPMImage_read(const char* filename);
 

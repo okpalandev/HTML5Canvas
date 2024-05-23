@@ -17,6 +17,7 @@ void PCamera_free(PCamera* camera) {
     if (camera != NULL) {
         free(camera);
     }
+    return;
 }
 
 // Function to project a 3D point onto a 2D plane

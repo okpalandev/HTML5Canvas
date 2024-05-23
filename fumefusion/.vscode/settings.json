@@ -6,6 +6,9 @@
         "image.h": "c",
         "stdio.h": "c",
         "stdlib.h": "c",
-        "ray.h": "c"
+        "ray.h": "c",
+        "string.h": "c",
+        "material.h": "c",
+        "hit.h": "c"
     }
 }
