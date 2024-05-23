@@ -6,7 +6,8 @@ Hit* Hit_create(Vec3* position, Vec3* normal, float t){
     hit->normal = normal;
     hit->t = t;
     return hit;
-};
+}
+
 
 void Hit_free(Hit* hit){
     if (hit){

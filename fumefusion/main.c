@@ -1,4 +1,3 @@
-// main.c
 #include "core/vector.h"
 #include "core/camera.h"
 #include "core/image.h"
@@ -23,7 +22,7 @@ int main() {
     // Create the sphere
     Vec3 *sphere_center = Vec3_create(0, 0, 3);
     double sphere_radius = 1.0;
-    Material *sphere_material = Material_create(Vec3_create(0,0,0), .5, 1,  .8);
+    Material *sphere_material = Material_create(Vec3_create(0, 0, 0), 0.5, 1, 0.8);
     Sphere *sphere = Sphere_create(sphere_center, sphere_radius, sphere_material);
 
     // Create the image
@@ -36,7 +35,7 @@ int main() {
     // Render the image
     for (int y = 0; y < image->height; y++) {
         for (int x = 0; x < image->width; x++) {
-            Vec3 uv = { (double)x / image->width, (double)y / image->height, 0.0 };
+            Vec2 uv = { (double)x / image->width, (double)y / image->height };
             Vec3 *point = PCamera_project(camera, &uv, 1.0f, (float)image->width / image->height);
             Ray *ray = Ray_create(camera->position, Vec3_sub(point, camera->position));
             Hit *hit = Sphere_intersect(sphere, ray);

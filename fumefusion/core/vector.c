@@ -100,11 +100,11 @@ Vec3* Vec3_create(float x, float y, float z) {
     return vec;
 }
 
-Vec3* Vec3_scale(const Vec3* vec, double scalar) {
+Vec3* Vec3_scale(Vec3* vec, double scalar) {
     if (vec) {
-        vec->x = vec->x * scalar;
-        vec->y =  vec->y * scalar;
-        vec->z = vec->z * scalar;
+        vec->x *= scalar;
+        vec->y *= scalar;
+        vec->z *= scalar;   
     };
 
     return vec;
