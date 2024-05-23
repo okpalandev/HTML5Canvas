@@ -37,7 +37,7 @@ void Vec2_free(Vec2* vec);
 
 /* Vec3 functions */
 Vec3* Vec3_create(float x, float y, float z);
-Vec3* Vec3_scale(Vec3* vec, float n);
+Vec3* Vec3_scale( Vec3* vec, double scalar);
 Vec3* Vec3_add(const Vec3* vec1, const Vec3* vec2);
 Vec3* Vec3_sub(const Vec3* vec1, const Vec3* vec2);
 Vec3* Vec3_cross(const Vec3* vec1, const Vec3* vec2);
@@ -50,6 +50,8 @@ Vec3* Vec3_rotY(Vec3* vec, float theta);
 Vec3* Vec3_rotZ(Vec3* vec, float theta);
 float* Vec3_toArray(const Vec3* vec);
 Vec3* Vec3_clone(const Vec3* vec);
+Vec3* Vec3_reflect(const Vec3* vec, const Vec3* normal);
+Vec3* Vec3_normalize(Vec3* vec);
 void Vec3_free(Vec3* vec);
 
 #endif // VECTOR_H

@@ -14,6 +14,7 @@ struct Ray_s {
 
 // Function to initialize a ray
 Ray* Ray_create(Vec3 *origin, Vec3 *direction);
+// Function to get the point on the ray at distance t
 
 // Function to free the ray memory
 void Ray_free(Ray* ray);

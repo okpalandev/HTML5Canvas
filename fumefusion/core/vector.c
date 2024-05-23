@@ -100,12 +100,13 @@ Vec3* Vec3_create(float x, float y, float z) {
     return vec;
 }
 
-Vec3* Vec3_scale(Vec3* vec, float n) {
+Vec3* Vec3_scale(const Vec3* vec, double scalar) {
     if (vec) {
-        vec->x *= n;
-        vec->y *= n;
-        vec->z *= n;
-    }
+        vec->x = vec->x * scalar;
+        vec->y =  vec->y * scalar;
+        vec->z = vec->z * scalar;
+    };
+
     return vec;
 }
 
@@ -204,6 +205,24 @@ float* Vec3_toArray(const Vec3* vec) {
     return arr;
 }
 
+Vec3* Vec3_reflect(const Vec3* vec, const Vec3* normal){
+    if (!vec || !normal) return NULL;
+    Vec3* reflection = Vec3_clone(normal);
+    Vec3_scale(reflection, 2 * Vec3_dot(vec, normal));
+    Vec3_sub(reflection, vec);
+    return reflection;
+
+}
+Vec3* Vec3_normalize(Vec3* vec){
+    if (!vec) return NULL;
+    float mag = Vec3_magnitude(vec);
+    if (mag != 0) {
+        vec->x /= mag;
+        vec->y /= mag;
+        vec->z /= mag;
+    }
+    return vec;
+}
 Vec3* Vec3_clone(const Vec3* vec) {
     if (!vec) return NULL;
     return Vec3_create(vec->x, vec->y, vec->z);

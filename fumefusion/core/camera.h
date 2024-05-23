@@ -2,20 +2,14 @@
 #define CAMERA_H
 
 #include "vector.h"
-#include <stdlib.h>
-#include <stdio.h>
 
-typedef struct PCamera_s PCamera;
-struct PCamera_s {
+typedef struct PCamera {
     Vec3 *position;
-    Vec3 *target;
-} ;
-// Function to initialize a camera
-PCamera* PCamera_create(Vec3 *position, Vec3 *target);
+    Vec3 *direction;
+} PCamera;
 
-// Function to free the camera memory
+PCamera* PCamera_create(Vec3* position, Vec3* direction);
 void PCamera_free(PCamera* camera);
+Vec3* PCamera_project(PCamera* camera, Vec2* uv, float zoom, float aspectRatio);
 
-// Function to project a 3D point onto a 2D plane
-Vec2* PCamera_project(const PCamera* camera, const Vec3* point, float zoom, float aspectRatio);
 #endif // CAMERA_H

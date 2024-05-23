@@ -27,8 +27,6 @@ void PPMPixel_free(PPMPixel* pixel) {
     }
 }
 
-
-
 PPMImage* PPMImage_create(unsigned int width, unsigned int height) {
     PPMImage* img = (PPMImage*)malloc(sizeof(PPMImage));
     if (!img) {
@@ -99,10 +97,17 @@ int PPMImage_write(const char *filename, const PPMImage *img) {
     return 1;
 }
 
-
 void PPMImage_free(PPMImage *img) {
     if (img) {
         free(img->data);
         free(img);
     }
+}
+
+void PPMImage_setPixel(PPMImage* img, int x, int y, unsigned int r, unsigned int g, unsigned int b) {
+    if (x < 0 || x >= img->width || y < 0 || y >= img->height) {
+        return;
+    }
+    PPMPixel *pixel = &img->data[y * img->width + x];
+    PPMPixel_set(pixel, r, g, b);
 }

@@ -9,6 +9,8 @@
         "ray.h": "c",
         "string.h": "c",
         "material.h": "c",
-        "hit.h": "c"
+        "hit.h": "c",
+        "math.h": "c",
+        "sphere.h": "c"
     }
 }

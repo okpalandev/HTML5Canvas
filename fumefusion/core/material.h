@@ -4,16 +4,15 @@
 
 #include "vector.h"
 #include "ray.h"
-#include "hit.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
 
 typedef struct Material_s Material;
 struct Material_s {
-    Vec3* color;
-    float reflectivity;
-    float refractivity;
+    Vec3* color; // Diffuse color
+    float reflectivity; // 0 for diffuse, 1 for mirror
+    float refractivity; // 0 for opaque, 1 for transparent
     float ior; // Index of refraction
 };
 

@@ -15,11 +15,10 @@ struct Hit_s {
     Vec3* position;
     Vec3* normal;
     float t;
-    Material* material;
 };
 
 
-Hit* Hit_create(Vec3* position, Vec3* normal, float t, Material* material);
+Hit* Hit_create(Vec3* position, Vec3* normal, float t);
 void Hit_free(Hit* hit);
 
 #endif // HIT_H
