@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "*.haml": "html",
+        "vector.h": "c",
+        "camera.h": "c",
+        "image.h": "c",
+        "stdio.h": "c",
+        "stdlib.h": "c",
+        "ray.h": "c"
+    }
+}
