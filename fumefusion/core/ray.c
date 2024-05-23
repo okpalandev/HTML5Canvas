@@ -10,7 +10,6 @@ Ray* Ray_create(Vec3 *origin, Vec3 *direction) {
 }
 
 
-
 void Ray_free(Ray* ray) {
     if (ray) {
         free(ray);
