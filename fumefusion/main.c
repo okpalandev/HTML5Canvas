@@ -4,6 +4,8 @@
 #include "core/ray.h"
 #include "core/sphere.h"
 #include "core/material.h"
+#include "core/hit.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -24,6 +26,7 @@ Hit* shoot_ray(PCamera* camera, Vec2* uv, Sphere* sphere) {
 }
 
 int main() {
+
     // Create the camera    
     Vec3 *camera_position = Vec3_create(0, 0, 10); // Move the camera further from the scene
     Vec3 *camera_direction = Vec3_create(0, 0, -1);
@@ -40,7 +43,8 @@ int main() {
     if (!image || !image->data) {
         fprintf(stderr, "Error: Could not create image.\n");
         return 1;
-    }
+    };
+
 
     // Render the image
     srand(time(NULL)); // Seed the random number generator
