@@ -1,7 +1,9 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
 
+// Shader source code
 const char* vertexShaderSource = "#version 140\n"
     "layout (location = 0) in vec3 aPos;\n"
     "void main()\n"
@@ -16,17 +18,37 @@ const char* fragmentShaderSource = "#version 140\n"
     "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
     "}\0";
 
+void checkShaderCompileStatus(GLuint shader, const char* type) {
+    GLint success;
+    GLchar infoLog[512];
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+    if (!success) {
+        glGetShaderInfoLog(shader, 512, NULL, infoLog);
+        printf("ERROR::SHADER::%s::COMPILATION_FAILED\n%s\n", type, infoLog);
+    }
+}
+
+void checkProgramLinkStatus(GLuint program) {
+    GLint success;
+    GLchar infoLog[512];
+    glGetProgramiv(program, GL_LINK_STATUS, &success);
+    if (!success) {
+        glGetProgramInfoLog(program, 512, NULL, infoLog);
+        printf("ERROR::SHADER::PROGRAM::LINKING_FAILED\n%s\n", infoLog);
+    }
+}
+
 int main() {
     // Initialize GLFW
     if (!glfwInit()) {
-        std::cerr << "Failed to initialize GLFW\n";
+        printf("Failed to initialize GLFW\n");
         return -1;
     }
 
     // Create a GLFW window
     GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL Window", NULL, NULL);
     if (!window) {
-        std::cerr << "Failed to create GLFW window\n";
+        printf("Failed to create GLFW window\n");
         glfwTerminate();
         return -1;
     }
@@ -36,57 +58,40 @@ int main() {
     // Initialize GLEW
     glewExperimental = GL_TRUE; // Needed for core profile
     if (glewInit() != GLEW_OK) {
-        std::cerr << "Failed to initialize GLEW\n";
+        printf("Failed to initialize GLEW\n");
         return -1;
     }
 
-    // Build and compile our shader program
+    // Build and compile shader program
     // Vertex shader
-    unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
     glCompileShader(vertexShader);
-    // Check for shader compile errors
-    int success;
-    char infoLog[512];
-    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-    if (!success) {
-        glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-        std::cerr << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
-    }
+    checkShaderCompileStatus(vertexShader, "VERTEX");
 
     // Fragment shader
-    unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
     glCompileShader(fragmentShader);
-    // Check for shader compile errors
-    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-    if (!success) {
-        glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-        std::cerr << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
-    }
+    checkShaderCompileStatus(fragmentShader, "FRAGMENT");
 
     // Link shaders
-    unsigned int shaderProgram = glCreateProgram();
+    GLuint shaderProgram = glCreateProgram();
     glAttachShader(shaderProgram, vertexShader);
     glAttachShader(shaderProgram, fragmentShader);
     glLinkProgram(shaderProgram);
-    // Check for linking errors
-    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-    if (!success) {
-        glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-        std::cerr << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
-    }
+    checkProgramLinkStatus(shaderProgram);
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 
-    // Set up vertex data (and buffer(s)) and configure vertex attributes
+    // Set up vertex data and configure vertex attributes
     float vertices[] = {
         -0.5f, -0.5f, 0.0f,
          0.5f, -0.5f, 0.0f,
          0.0f,  0.5f, 0.0f
     };
 
-    unsigned int VBO, VAO;
+    GLuint VBO, VAO;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
 
@@ -106,7 +111,7 @@ int main() {
     while (!glfwWindowShouldClose(window)) {
         // Input
         if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-            glfwSetWindowShouldClose(window, true);
+            glfwSetWindowShouldClose(window, 1);
 
         // Render
         glClear(GL_COLOR_BUFFER_BIT);

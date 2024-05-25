@@ -47,7 +47,7 @@ sudo apt update
 sudo apt upgrade
 sudo apt install xserver-xorg-video-intel # For Intel GPUs
 sudo apt install xserver-xorg-video-nouveau # For NVIDIA GPUs
-sudo apt install xserver-xorg-video-amdgpu # For AMD GPUs
+sudo apt install xserver-xorg-video-amdgpu # For AMD GPUs 
 sudo apt install mesa-utils
 ```
 
