@@ -39,8 +39,17 @@ To set up GLSL (OpenGL Shading Language) development on WSL (Windows Subsystem f
 - **Install necessary packages**:
   ```bash
   sudo apt install build-essential cmake git libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libgl1-mesa-dev libglew-dev libglfw3-dev libglfw3 libglfw3-dev libglew-dev libgl1-mesa-dev libxrandr-dev libxinerama-dev libxcursor-dev
-
   ``` 
+
+- **preresequites**
+```bash
+sudo apt update
+sudo apt upgrade
+sudo apt install xserver-xorg-video-intel # For Intel GPUs
+sudo apt install xserver-xorg-video-nouveau # For NVIDIA GPUs
+sudo apt install xserver-xorg-video-amdgpu # For AMD GPUs
+sudo apt install mesa-utils
+```
 
 - **Verify Installation:**
 Check that the GLEW header files and libraries are installed correctly:
@@ -229,9 +238,8 @@ You can use a variety of text editors or IDEs. Here are a few options:
       return 0;
   }
   ```
-
+## Restart the terminal and run the following commands to compile and run the program:
 - **Compile and run the program**:
   ```bash
   g++ -o myapp main.cpp -lglfw -lGL -lGLEW
-  ./myapp
   ```
