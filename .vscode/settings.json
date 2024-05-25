@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.haml": "html",
+        "iostream": "cpp"
+    }
+}
