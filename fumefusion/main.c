@@ -48,7 +48,7 @@ int main() {
 
     // Render the image
     srand(time(NULL)); // Seed the random number generator
-    int num_rays = 500;
+    int num_rays = 100;
     for (int y = 0; y < image->height; y++) {
         for (int x = 0; x < image->width; x++) {
             double intensity_sum = 0.0;
