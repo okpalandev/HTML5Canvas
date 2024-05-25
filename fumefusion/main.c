@@ -26,7 +26,6 @@ Hit* shoot_ray(PCamera* camera, Vec2* uv, Sphere* sphere) {
 }
 
 int main() {
-
     // Create the camera    
     Vec3 *camera_position = Vec3_create(0, 0, 10); // Move the camera further from the scene
     Vec3 *camera_direction = Vec3_create(0, 0, -1);
@@ -37,14 +36,13 @@ int main() {
     double sphere_radius = 2.0; // Adjust the sphere radius
     Material *sphere_material = Material_create(Vec3_create(0.9, 0.2, 0.2), 0.5, 1, 0.8);  // Adjust material color
     Sphere *sphere = Sphere_create(sphere_center, sphere_radius, sphere_material);
-
+    
     // Create the image
     PPMImage *image = PPMImage_create(512, 512);
     if (!image || !image->data) {
         fprintf(stderr, "Error: Could not create image.\n");
         return 1;
     };
-
 
     // Render the image
     srand(time(NULL)); // Seed the random number generator
