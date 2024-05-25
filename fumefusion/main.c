@@ -12,7 +12,7 @@
 #include <time.h>
 
 const int LAMINAR_FLOW_LOWER_LIMIT = 0;
-const double LAMINAR_FLOW_UPPER_LIMIT = 2300;
+const double LAMINAR_FLOW_UPPER_LIMIT = 2300; 
 const double TRANSITION_FLOW_UPPER_LIMIT = 3500;
 
 // Function to shoot a ray and check for intersection with the sphere

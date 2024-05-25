@@ -88,8 +88,7 @@ Sphere Sphere_create(Vec3 center, float radius, Vec3 surfaceColor, float reflect
     s.transparency = transparency;
     s.reflection = reflection;
     return s;
-};
-
+}
 
 int Sphere_intersect(Sphere s, Vec3 rayorig, Vec3 raydir, float* t0, float* t1) {
     Vec3 l = Vec3_subtract(s.center, rayorig);
@@ -119,7 +118,8 @@ Vec3 trace(Vec3 rayorig, Vec3 raydir, Sphere* spheres, int numSpheres, int depth
                 sphere = &spheres[i];
             }
         }
-    }
+    };
+
     if (!sphere) return Vec3_create(2, 2, 2);
     Vec3 surfaceColor = Vec3_create(0, 0, 0);
     Vec3 phit = Vec3_add(rayorig, Vec3_multiply(raydir, tnear));
